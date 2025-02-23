@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday!</title>
+  <style>
+    /* Add these new styles */
+    .quotes-container p {
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      position: absolute;
+      width: 80%;
+      left: 10%;
+      margin: 0 auto;
+    }
+
+    .quotes-container p.active {
+      opacity: 1;
+      position: relative;
+    }
+
+    .quotes-container {
+      min-height: 100px; /* Prevent layout shift */
+      position: relative;
+    }
+
+    body { 
+      font-family: Arial, sans-serif; 
+      text-align: center; 
+      background: url('roses-background.jpg') no-repeat center center fixed; 
+      background-size: cover;
+      color: #ffffff; 
+      overflow: auto;
+      margin: 0;
+      padding: 0;
+    }
+    h1 { font-size: 3em; color: #ffcc00; }
+    p { font-size: 1.2em; color: #ffcc99; }
+    img { width: 60%; border-radius: 10px; margin-top: 10px; }
+    .container { padding: 20px; position: relative; z-index: 2; }
+
+    /* Fireworks Animation (canvas placeholder) */
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      background: transparent;
+      z-index: 1;
+    }
+
+    .quotes-container {
+      font-size: 1.5em;
+      font-style: italic;
+      margin-top: 20px;
+      color: #ffcc00;
+      text-align: center;
+      transition: opacity 1s ease-in-out;
+    }
+
+    #surprise-content {
+      display: none;
+      margin-top: 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    #surprise-btn {
+      background-color: #ff6699;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 10px;
+      margin-top: 20px;
+      transition: background-color 0.3s;
+    }
+    #surprise-btn:hover {
+      background-color: #ff3366;
+    }
+
+    .cat, .flowers {
+      width: 200px;
+      margin-top: 10px;
+    }
+
+    /* Scrollable Letter with Parchment & Blueprint Touches */
+    .letter-container {
+      width: 60%;
+      max-width: 600px;
+      background: url('parchment.jpg') no-repeat center center;
+      background-size: cover;
+      color: #333333;
+      padding: 20px;
+      margin: 50px auto;
+      border-radius: 10px;
+      text-align: left;
+      font-size: 1.2em;
+      overflow-y: auto;
+      max-height: 300px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+      transition: opacity 1s ease-in-out;
+      position: relative;
+      font-family: Georgia, serif;
+      border: 2px dashed #b22222;
+    }
+
+    /* THIS IS THE CRUCIAL FIX */
+    .letter-container p {
+      color: #333333 !important;
+    }
+
+    .letter-container h2 {
+      color: #444;
+      text-align: center;
+    }
+
+    /* Navigation Bar for Letters */
+    .letter-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+    .letter-nav button {
+      background-color: #b22222;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+    .letter-nav button:hover {
+      background-color: #ff4444;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="fireworks"></canvas>
+  <div class="container">
+    <h1>Happy Birthday, Fatima Abrar! 🎉</h1>
+    <p>You are the Noor of my life. You make me happy, energetic, and human. With you, I felt I was living.</p>
+    <img src="birthday-image.jpg" alt="Happy Birthday">
+
+    **<div class="quotes-container">
+      <p class="active">"You are my favorite thought of every day."</p>
+      <p>"Itni saari kissi karungi na..."</p>
+      <p>"I love that you are so protective and aware of me and everything around me"</p>
+      <p>"I've never been more in love"</p>
+      <p>"I want to finally be able to see you live, watch every movement of your body"</p>
+      <p>"And the desire to have you right here with me kills me"</p>
+      <p>"I’ve longed for you my entire life"</p>
+      <p>"I don’t want anyone else to see this side of yours ever"</p>
+      <p>"I wanna kiss u while sitting itna zyada that you fall back"</p>
+      <p>"Because you wanted to see me in red"</p>
+      <p>"I'm unhealthily obsessed w you"</p>
+      <p>"I feel like I'm on cloud 9"</p>
+      <p>"Mere paas ajayein"</p>
+      <p>"Ugh same... waiting for you"</p>
+      <p>"I love you so much"</p>
+      <p>"Always remember how much I love you"</p>
+      <p>"I'm so happy to be yours"</p>
+      <p>"Zyada drame na kiya karein okay?"</p>
+      <p>"Can you marry me and take care of me like I'm a little baby"</p>
+    </div>
+
+    <button id="surprise-btn">Click for a Surprise</button>
+    <div id="surprise-content">
+      <img src="cat.png" alt="Cute Cat" class="cat">
+      <p>"Meow! Happy Birthday, my love!"</p>
+      <img src="flowers.png" alt="Beautiful Flowers" class="flowers">
+    </div>
+
+    <div class="letter-nav" id="letter-nav"></div>
+
+    <div class="letter-container" id="letter-container">
+      <h2>A Special Letter</h2>
+      <p id="letter-content">Dear Fatima,</p>
+    </div>
+  </div>
+
+  <script>
+    // Quote cycling animation
+    let currentQuote = 0;
+    const quotes = document.querySelectorAll('.quotes-container p');
+    
+    function showNextQuote() {
+      quotes[currentQuote].classList.remove('active');
+      currentQuote = (currentQuote + 1) % quotes.length;
+      quotes[currentQuote].classList.add('active');
+    }
+
+    // Start cycling after 3 seconds
+    setTimeout(() => {
+      setInterval(showNextQuote, 3000); // Change quote every 3 seconds
+    }, 3000);
+    const letters = [
+      { 
+        title: "Letter 1", 
+        content: "Meine Traumfrau, I read about your favorite childhood candy. It was hard to find at first because the spelling you gave me was wrong (I know im a smarty pants). The real spelling is alpenliebe. How did I crack this? Because there was a brief period in my life where I learned german ( yes just for fun). Alpen means the swiss alps and liebe is german for love. So the name stands for ‘love of the alps’. The name is chosen so that the candy evokes an image of the beautiful, lush swiss mountains, also Switzerland is known for its chocolates so the name gives it a sense of authenticity and purity.\n(meine traumfrau means my dream woman)\nThe thing about being with a genius is that whenever you think you know him all. Youll find something amazing you didn’t know. \n(please be ready for letters in Pashto, Urdu, English, Spanish and German (im also planning on learning French so…. )\nLove, Sam" 
+      },
+      { 
+        title: "Letter 2", 
+        content: "Letters to sam\n\none\n\ndear sam,\n\ni always thought im a strong person. that i can bear any hurt mental or physical, confront my twisted thoughts and yet never let them influence my personality. i thought i was a perfect man that i didnt need anyone. that i was whole. i wheeze now think that i once thought i was strong because i was heartless.\n\nthen enter you and i realized I couldn’t have been more wrong.\n\nyou have taught me so many things(please dont be flattered to think you taught a genius). you have taught me to love, both myself and you, you have taught me to lower my eyes, to stay away from filth. and the good thing is most of these things you didnt even consciously ask me to do but the strength of our string, the allure of your love was so strong that i learned them instinctively. \n\nbut the most important thing you’re teaching me is to trust again. you have no idea how much i love you, you have become my soul, my heart. you ugh you just don’t know. and again the good thing is im not forcing you to ask me or text me things that i want you to ask or text. its just so natural. you do exactly the things i want you to do and you say that i do the same for you. i guess that’s what the term soulmates, red string, and others are for.\n\ni could write till fingers go numb and the phone drops over my face but i dont wanna risk that. im not so cute as it is.\n\ni love you\n\ngood night" 
+      },
+      { 
+        title: "Letter 3", 
+        content: "a nihilist in love\n\nHow many more nights to rest in your arms,\nWounds, dead skin inhabit my hands,\nReminders of the lives I’ve lived. Boys I fought. Men I looked dead in the eye. Men who told me\nmy directness will be my death one day.\nHow long before you heal them with a soft kiss, just a slide of your thumb\nMy mind was always too much for me. I was given too powerful a mind and not enough to\nsatisfy its cravings.. I fed it with toxins. Not to kill it. Maybe to put it to sleep while I work on\nearning enough to let it play.\n\nHow many more gutkapainted walls, harsh horns,\nBefore I watch you stroke a cat’s chin, talk in meowish.\nHow many more naked Karachi cuss words,\nBefore I can enjoy your Emirati accent, tweak Punjabi words.\n\nI was born into a world not made for me. So, I decided to build my own world.\nHow long before you become its first inhabitant.\nHow long before I watch the Pashtun breeze flap your long black hair,\nMake your breasts move to and fro.\n\nI was a man of few words, too many thoughts. You made me a man of few thoughts, too many\nwords.\n\nSigh, how powerful, how compelling is the beauty of your puerile behavior that it changed me.\nhow special that only I, Sam, gets to see this side of you. Because otherwise you are clever, sharp\nand you excel at everything you do: design, build, sketch, present, care, yap, love. Your love is\nenough. You are enough.\n\nHow honeyed, feminine your laugh. How loyal, responsive that you earned my trust in such a\nshort while. How strong your love that you never let me go. How strong your love that you don’t\ngive up. How obsessive that you discuss me with your friends and associate so many things with\nthe name Sam. Is it selfish to say that I am glad the schmuck before me couldn’t see your worth?\nThat’s why I got so lucky! You are with me now and I am not gonna fumble you. \n\nSam and Sam\ntill the end of time." 
+      },
+      { 
+        title: "Letter 4", 
+        content: "Dear Sam,\n\nToday marks the first month since we started talking.\n\nI dived into your world, saw your quirkiness, and felt your love—so overwhelming that even when you try to contain it, it spills over like an overflowing honeycomb. And I want to savor every last drop of it. I'll never let any of your love go to waste. Every picture, update, voice note, video, stream, fit-check, and shared moment stays with me. I’ve met your family, your friends, and your pets. I felt at home in your little world almost instantly.\n\nWe discovered our mutual loves—letters, online dates, family-oriented mindsets, dark humor, twisted jokes, and some things I can’t mention here. We share a hatred for stupidity, woke culture, and modern decadence. Even our humor aligns—suicide jokes and all (I’m kidding, of course).\n\nThere have been arguments, disagreements, and painful conversations. But our love has proven stronger each time, and we’ve come out of every challenge even more madly in love. (Okay, I do sound like an old man here, but you’ll have to get used to my alternating minds.)\n\nI have loved the sun and the moon from millions of kilometers away. I have marveled at the beauty of black holes and warm holes that lie millions of light-years from me. I have spent entire days pondering the mystery of the beginning of time, 14.2 billion years distant. But I have never hated distance more than I despise the 1,221 kilometers between your city and mine. Twelve hundred and twenty-one kilometers—I will never forget the trauma this number has given me. I have hated it every time you wanted a hug, a kiss, or a cuddle, and I couldn’t give it to you because of this fucking distance.\n\nEven now, as I write this letter, you are on my mind. You just told me you’re feeling weak and might faint. I’m constantly worried—how is she? Does she have someone trustworthy with her? Is she sleeping with no one to adjust her scarf for her?\n\nSigh.\n\nYou are the ache in my heart, the coolness of my eyes, the gentle evening breeze that caresses my cheek after a scorching Karachi afternoon. Everything you are insecure about, I love—your nose, your accent, your you-know-what.\n\nYou are a special woman, Fatima Abrar. Precious beyond words. I love every part of your mind, soul, and body. I want to reach every pore of you—through talking, sharing, suffering, growing, and yes, through passion. Until there is a part of Samad in every corner of Fatima. Until you are completely mine. When that day comes, I will know that no man has ever loved a woman more than I love you.\n\nFor you and I will be one for eternity, our story floating through history, etching itself into time.\n\nI love you, meri jaan—now and forever.\n\nYours, and only yours, now and forever,\nAbdul Samad Khan\n\nP.S. It’s possible that when I send you this, I won’t be home. So you’ll have enough time to type your reply before I return." 
+      }
+    ];
+    
+    const letterNav = document.getElementById("letter-nav");
+    const letterContent = document.getElementById("letter-content");
+    
+    function displayLetter(index) {
+      const letterContainer = document.getElementById("letter-container");
+      letterContainer.style.opacity = 0;
+      setTimeout(() => {
+        letterContent.innerText = letters[index].content;
+        letterContainer.style.opacity = 1;
+      }, 500);
+    }
+    
+    // Populate the navigation bar with buttons for each letter
+    letters.forEach((letter, index) => {
+      const btn = document.createElement("button");
+      btn.innerText = letter.title;
+      btn.onclick = () => displayLetter(index);
+      letterNav.appendChild(btn);
+    });
+    
+    // Surprise button functionality
+    document.getElementById("surprise-btn").addEventListener("click", function() {
+      document.getElementById("surprise-content").style.display = "block";
+    });
+  </script>
+</body>
+</html>
